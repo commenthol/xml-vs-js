@@ -1,0 +1,57 @@
+{
+  "name": "xml-vs-js",
+  "version": "0.0.0",
+  "description": "A xml to js to xml transformer",
+  "keywords": [
+    "converter",
+    "html",
+    "html-to-json",
+    "transformer",
+    "xml",
+    "xml-to-js",
+    "xml-to-json"
+  ],
+  "homepage": "https://github.com/commenthol/xmljs#readme",
+  "bugs": {
+    "url": "https://github.com/commenthol/xml-vs-js/issues"
+  },
+  "license": "Unlicense",
+  "author": "commenthol <commenthol@gmail.com>",
+  "main": "src",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commenthol/xml-vs-js.git"
+  },
+  "scripts": {
+    "all": "npm run clean && npm run lint && npm test",
+    "clean": "rimraf coverage .nyc_output",
+    "clean:all": "rimraf node_modules && npm run clean",
+    "coverage": "nyc -r text -r html npm test",
+    "lint": "eslint '**/*.js'",
+    "prepublishOnly": "npm run all",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "entities": "^1.1.1",
+    "html-void-elements": "^1.0.3",
+    "htmlparser2": "^3.9.2"
+  },
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "serialize-to-js": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8"
+  }
+}
