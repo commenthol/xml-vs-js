@@ -28,9 +28,10 @@ For syntax of the Js Object please refer to the test fixtures in `./test/fixture
 
 - [Table of Contents](#table-of-contents)
 - [Conversion from XML to Js](#conversion-from-xml-to-js)
-  - [Example toJs](#example-tojs)
+	- [Example toJs](#example-tojs)
 - [Conversion from Js to XML](#conversion-from-js-to-xml)
-  - [Example toXml](#example-toxml)
+	- [Example toXml](#example-toxml)
+	- [Example toXml with order of elems](#example-toxml-with-order-of-elems)
 - [License](#license)
 - [References](#references)
 
