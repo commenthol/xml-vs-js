@@ -1,4 +1,4 @@
-const {Parser} = require('htmlparser2')
+const { Parser } = require('htmlparser2')
 const {
   TEXT,
   ELEMS,

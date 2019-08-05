@@ -1,15 +1,15 @@
 const assert = require('assert')
-const {toJs} = require('..')
+const { toJs } = require('..')
 const log = require('debug')('test:toJs')
 const fixtures = require('./fixtures/forJs.js')
-const {serializeToModule} = require('serialize-to-js')
+const serializeToModule = require('serialize-to-module')
 const fs = require('fs')
 
 const WRITE = process.env.WRITE || false
 
 function writeFixtures () {
   if (WRITE) {
-    const data = serializeToModule(fixtures, {unsafe: true})
+    const data = serializeToModule(fixtures, { unsafe: true })
     fs.writeFileSync(`${__dirname}/fixtures/forJs.js`, data, 'utf8')
   }
 }
@@ -30,12 +30,12 @@ describe('toJs', function () {
   })
   Object.keys(fixtures).forEach(test => {
     itt(test, function (done) {
-      const {xml, obj, opts} = fixtures[test]
+      const { xml, obj, opts } = fixtures[test]
       const fn = (err, data) => {
         log('%j', data)
         update(fixtures[test], data)
         assert.ok(!err)
-        assert.deepEqual(data, obj)
+        assert.deepStrictEqual(data, obj)
         done()
       }
       if (opts) toJs(xml, opts, fn)

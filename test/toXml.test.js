@@ -1,15 +1,15 @@
 const assert = require('assert')
-const {toXml} = require('..')
+const { toXml } = require('..')
 const log = require('debug')('test:toXml')
 const fixtures = require('./fixtures/forXml.js')
-const {serializeToModule} = require('serialize-to-js')
+const serializeToModule = require('serialize-to-module')
 const fs = require('fs')
 
 const WRITE = process.env.WRITE || false
 
 function writeFixtures () {
   if (WRITE) {
-    const data = serializeToModule(fixtures, {unsafe: true})
+    const data = serializeToModule(fixtures, { unsafe: true })
     fs.writeFileSync(`${__dirname}/fixtures/forXml.js`, data, 'utf8')
   }
 }
@@ -30,12 +30,12 @@ describe('toXml', function () {
   })
   Object.keys(fixtures).forEach(test => {
     itt(test, function (done) {
-      const {xml, obj, opts} = fixtures[test]
+      const { xml, obj, opts } = fixtures[test]
       const fn = (err, data) => {
         log('%j', data)
         update(fixtures[test], data)
         assert.ok(!err)
-        assert.deepEqual(data, xml)
+        assert.deepStrictEqual(data, xml)
         done()
       }
       if (opts) toXml(obj, opts, fn)
@@ -60,7 +60,7 @@ describe('toXml', function () {
     toXml(obj, (err, data) => {
       log('%j', data)
       assert.ok(!err)
-      assert.deepEqual(data, xml)
+      assert.deepStrictEqual(data, xml)
       done()
     })
   })

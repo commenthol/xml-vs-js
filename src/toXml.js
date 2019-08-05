@@ -1,4 +1,4 @@
-const {encodeXML, encodeHTML} = require('entities')
+const { encodeXML, encodeHTML } = require('entities')
 const voidElements = require('html-void-elements')
 
 const escapeHTMLMap = {
@@ -117,7 +117,7 @@ function toXml (obj, opts, cb) {
     out.push(text)
   }
 
-  function build (pointer, {type}) {
+  function build (pointer, { type }) {
     let selfClosing = true
     if (pointers.indexOf(pointer) !== -1) {
       return selfClosing // circular ref detected
@@ -142,7 +142,7 @@ function toXml (obj, opts, cb) {
         selfClosing = false
         let _selfClosing = false
         if (typeof val === 'object') {
-          _selfClosing = build(val, {type: elem})
+          _selfClosing = build(val, { type: elem })
           if (_selfClosing) out.pop()
         } else {
           pushText(val, type)
