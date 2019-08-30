@@ -15,6 +15,7 @@ const {
   TEXT,
   ELEMS,
   ATTRIBS,
+  NAMESPACE,
   PROCESSING,
   CDATA,
   COMMENT
@@ -37,7 +38,7 @@ const buildAttribs = (attrs) => {
 
 const buildElems = (pointer) => {
   return Object.keys(pointer)
-    .filter(n => n !== ATTRIBS)
+    .filter(n => n !== ATTRIBS && n !== NAMESPACE)
     .reduce((n, elem) => {
       if (Array.isArray(pointer[elem])) {
         pointer[elem].forEach(() => n.push(elem))
@@ -55,7 +56,10 @@ const buildCounter = (elems) => {
   }, {})
 }
 
-const openTag = (elem, attrs) => {
+const toNs = ns => ns ? `${ns}:` : ''
+
+const openTag = (elem, attrs, ns) => {
+  const _elem = toNs(ns) + elem
   switch (elem) {
     case COMMENT:
       return '<!--'
@@ -64,11 +68,12 @@ const openTag = (elem, attrs) => {
     case PROCESSING:
       return '<'
     default:
-      return `<${elem}${attrs}>`
+      return `<${_elem}${attrs}>`
   }
 }
 
-const closeTag = (elem, attrs, selfClosing, opts) => {
+const closeTag = (elem, attrs, ns, selfClosing, opts) => {
+  const _elem = toNs(ns) + elem
   switch (elem) {
     case COMMENT:
       return '-->'
@@ -78,10 +83,10 @@ const closeTag = (elem, attrs, selfClosing, opts) => {
       return '>\n'
     default:
       return !selfClosing
-        ? `</${elem}>`
-        : !opts.xmlMode && ~voidElements.indexOf(elem)
-          ? `<${elem}${attrs}>`
-          : `<${elem}${attrs}/>`
+        ? `</${_elem}>`
+        : !opts.xmlMode && ~voidElements.indexOf(_elem)
+          ? `<${_elem}${attrs}>`
+          : `<${_elem}${attrs}/>`
   }
 }
 
@@ -138,7 +143,8 @@ function toXml (obj, opts, cb) {
         selfClosing = false
       } else {
         const attrs = buildAttribs(ref._attrs)
-        out.push(openTag(elem, attrs))
+        const ns = ref._ns
+        out.push(openTag(elem, attrs, ns))
         selfClosing = false
         let _selfClosing = false
         if (typeof val === 'object') {
@@ -148,7 +154,7 @@ function toXml (obj, opts, cb) {
           pushText(val, type)
           selfClosing = false
         }
-        out.push(closeTag(elem, attrs, _selfClosing, _opts))
+        out.push(closeTag(elem, attrs, ns, _selfClosing, _opts))
       }
       lastElem = elem
     })

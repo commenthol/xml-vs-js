@@ -442,5 +442,29 @@ module.exports = {
         }
       }
     }
+  },
+  namespaces: {
+    opts: {},
+    xml: '<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n<atom:feed xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><atom:title>Uploads from everyone</atom:title><dc:author>Me Myself</dc:author></atom:feed>',
+    obj: {
+      _PROCESSING: {
+        _text: '?xml version="1.0" encoding="utf-8" standalone="yes"?'
+      },
+      feed: {
+        _ns: 'atom',
+        _attrs: {
+          'xmlns:atom': 'http://www.w3.org/2005/Atom',
+          'xmlns:dc': 'http://purl.org/dc/elements/1.1/'
+        },
+        title: {
+          _ns: 'atom',
+          _text: 'Uploads from everyone'
+        },
+        author: {
+          _ns: 'dc',
+          _text: 'Me Myself'
+        }
+      }
+    }
   }
 }

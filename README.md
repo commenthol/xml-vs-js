@@ -11,6 +11,7 @@ Features:
 - Respects order of elements with `_elems` array.
 - Intented for manipulating/ parsing feeds or xml files where a full DOM is not required.
 - Usage of plain JSON object for easy storage.
+- Handles different xml namespaces.
 
 Why another xml to js converter?
 
@@ -52,6 +53,7 @@ toJs(xml, opts, (err, obj) => {})
 - `{Object} [opts.recognizeCDATA=true]` - recognize CDATA tags in html
 - `{Boolean} [opts.elems]` - set to `false` if output shall not contain `_elems` fields; order of xml elements is not guarateed any longer.
 - `{Boolean} [opts.attrs]` - set to `false` if output shall not contain any attributes `_attrs` fields;
+- `{Boolean} [opts.ns]` - set to `false` if output shall not contain any namespace `_ns` fields;
 - `{Function} cb` - `callback(err, obj)`
 
 ### Example toJs

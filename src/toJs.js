@@ -3,6 +3,7 @@ const {
   TEXT,
   ELEMS,
   ATTRIBS,
+  NAMESPACE,
   PROCESSING,
   CDATA,
   COMMENT
@@ -40,6 +41,7 @@ function toJs (xml, opts, cb) {
 
   const _ELEMS = _opts.elems !== undefined ? opts.elems : ELEMS
   const _ATTRIBS = _opts.attrs !== undefined ? opts.attrs : ATTRIBS
+  const _NAMESPACE = _opts.ns !== undefined ? opts.ns : NAMESPACE
 
   const elems = _ELEMS
     ? (pointer, name) => {
@@ -51,8 +53,24 @@ function toJs (xml, opts, cb) {
     : () => {}
   const lastElem = (pointer) => _ELEMS && pointer[_ELEMS] && pointer[_ELEMS][pointer[_ELEMS].length - 1]
 
+  const stripNamespace = (name = '') => {
+    const pos = name.indexOf(':')
+    return (pos === -1)
+      ? [name]
+      : [name.substring(pos + 1), name.substring(0, pos)]
+  }
+
+  const namespace = _NAMESPACE
+    ? (pointer, ns) => {
+      if (ns) pointer[_NAMESPACE] = ns
+    }
+    : () => {}
+
   // htmlparser2 event callbacks
   const onopentag = (name, attribs = {}) => {
+    const [_name, ns] = stripNamespace(name)
+    name = _name
+
     pointers.push(pointer)
     elems(pointer, name)
     if (pointer[name]) {
@@ -67,6 +85,7 @@ function toJs (xml, opts, cb) {
       pointer[name] = {}
       pointer = pointer[name]
     }
+    namespace(pointer, ns)
     if (_ATTRIBS && Object.keys(attribs).length) pointer[_ATTRIBS] = attribs
   }
   const ontext = (text) => {
@@ -91,7 +110,7 @@ function toJs (xml, opts, cb) {
       }
     }
   }
-  const onclosetag = (name) => {
+  const onclosetag = (/* name */) => {
     pointer = pointers.pop()
   }
   const oncomment = (data) => {

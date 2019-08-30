@@ -367,5 +367,89 @@ module.exports = {
         }]
       }
     }
+  },
+  namespace: {
+    opts: {
+      elems: false
+    },
+    xml: `<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+    <atom:feed xmlns:atom="http://www.w3.org/2005/Atom">
+      <atom:title>Uploads from everyone</atom:title>
+    </atom:feed>`,
+    obj: {
+      _PROCESSING: {
+        _text: '?xml version="1.0" encoding="utf-8" standalone="yes"?'
+      },
+      feed: {
+        _ns: 'atom',
+        _attrs: {
+          'xmlns:atom': 'http://www.w3.org/2005/Atom'
+        },
+        title: {
+          _ns: 'atom',
+          _text: 'Uploads from everyone'
+        }
+      }
+    }
+  },
+  namespaces: {
+    opts: {
+      elems: false
+    },
+    xml: `<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+    <atom:feed xmlns:atom="http://www.w3.org/2005/Atom"
+      xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <atom:title>Uploads from everyone</atom:title>
+      <dc:author>Me Myself</dc:author>
+    </atom:feed>`,
+    obj: {
+      _PROCESSING: {
+        _text: '?xml version="1.0" encoding="utf-8" standalone="yes"?'
+      },
+      feed: {
+        _ns: 'atom',
+        _attrs: {
+          'xmlns:atom': 'http://www.w3.org/2005/Atom',
+          'xmlns:dc': 'http://purl.org/dc/elements/1.1/'
+        },
+        title: {
+          _ns: 'atom',
+          _text: 'Uploads from everyone'
+        },
+        author: {
+          _ns: 'dc',
+          _text: 'Me Myself'
+        }
+      }
+    }
+  },
+  'disable namespaces in output': {
+    opts: {
+      elems: false,
+      ns: false
+    },
+    xml: `<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+    <atom:feed xmlns:atom="http://www.w3.org/2005/Atom"
+      xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <atom:title>Uploads from everyone</atom:title>
+      <dc:author>Me Myself</dc:author>
+    </atom:feed>`,
+    obj: {
+      _PROCESSING: {
+        _text: '?xml version="1.0" encoding="utf-8" standalone="yes"?'
+      },
+      feed: {
+        _attrs: {
+          'xmlns:atom': 'http://www.w3.org/2005/Atom',
+          'xmlns:dc': 'http://purl.org/dc/elements/1.1/'
+        },
+        title: {
+          _text: 'Uploads from everyone'
+        },
+        author: {
+          _text: 'Me Myself'
+        }
+      }
+    }
   }
 }
