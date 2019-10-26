@@ -15,15 +15,15 @@
   "bugs": {
     "url": "https://github.com/commenthol/xml-vs-js/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commenthol/xml-vs-js.git"
+  },
   "license": "Unlicense",
   "author": "commenthol <commenthol@gmail.com>",
   "main": "src",
   "directories": {
     "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/commenthol/xml-vs-js.git"
   },
   "scripts": {
     "all": "npm run clean && npm run lint && npm test",
@@ -41,13 +41,13 @@
   },
   "devDependencies": {
     "debug": "^4.1.1",
-    "eslint": "^6.2.2",
+    "eslint": "^6.6.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "serialize-to-module": "^1.0.0"
   },
