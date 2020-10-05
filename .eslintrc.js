@@ -5,7 +5,7 @@ module.exports = {
     mocha: true
   },
   rules: {
-    'strict': 'off',
+    strict: 'off',
     'no-console': 'error'
   }
 }
