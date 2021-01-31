@@ -85,8 +85,8 @@ const closeTag = (elem, attrs, ns, selfClosing, opts) => {
       return !selfClosing
         ? `</${_elem}>`
         : !opts.xmlMode && ~voidElements.indexOf(_elem)
-          ? `<${_elem}${attrs}>`
-          : `<${_elem}${attrs}/>`
+            ? `<${_elem}${attrs}>`
+            : `<${_elem}${attrs}/>`
   }
 }
 
@@ -110,10 +110,10 @@ function toXml (obj, opts, cb) {
     [PROCESSING, COMMENT, CDATA].indexOf(type) !== -1
       ? val => val
       : !_opts.encodeEntities
-        ? escapeHTML
-        : _opts.xmlMode
-          ? encodeXML
-          : encodeHTML
+          ? escapeHTML
+          : _opts.xmlMode
+            ? encodeXML
+            : encodeHTML
   )
 
   const pushText = (val, type, lastElem) => {

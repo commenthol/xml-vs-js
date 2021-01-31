@@ -45,11 +45,11 @@ function toJs (xml, opts, cb) {
 
   const elems = _ELEMS
     ? (pointer, name) => {
-      if (!pointer[_ELEMS]) {
-        pointer[_ELEMS] = []
+        if (!pointer[_ELEMS]) {
+          pointer[_ELEMS] = []
+        }
+        pointer[_ELEMS].push(name)
       }
-      pointer[_ELEMS].push(name)
-    }
     : () => {}
   const lastElem = (pointer) => _ELEMS && pointer[_ELEMS] && pointer[_ELEMS][pointer[_ELEMS].length - 1]
 
@@ -62,8 +62,8 @@ function toJs (xml, opts, cb) {
 
   const namespace = _NAMESPACE
     ? (pointer, ns) => {
-      if (ns) pointer[_NAMESPACE] = ns
-    }
+        if (ns) pointer[_NAMESPACE] = ns
+      }
     : () => {}
 
   // htmlparser2 event callbacks

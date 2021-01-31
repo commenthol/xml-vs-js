@@ -4,13 +4,14 @@ const log = require('debug')('test:toJs')
 const fixtures = require('./fixtures/forJs.js')
 const serializeToModule = require('serialize-to-module')
 const fs = require('fs')
+const path = require('path')
 
 const WRITE = process.env.WRITE || false
 
 function writeFixtures () {
   if (WRITE) {
     const data = serializeToModule(fixtures, { unsafe: true })
-    fs.writeFileSync(`${__dirname}/fixtures/forJs.js`, data, 'utf8')
+    fs.writeFileSync(path.resolve(__dirname, 'fixtures/forJs.js'), data, 'utf8')
   }
 }
 
