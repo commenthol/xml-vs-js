@@ -35,21 +35,21 @@
     "test": "mocha"
   },
   "dependencies": {
-    "entities": "^2.2.0",
+    "entities": "^3.0.1",
     "html-void-elements": "^1.0.5",
-    "htmlparser2": "^6.0.0"
+    "htmlparser2": "^7.1.1"
   },
   "devDependencies": {
-    "debug": "^4.3.1",
-    "eslint": "^7.19.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "debug": "^4.3.2",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
-    "mocha": "^8.2.1",
+    "mocha": "^9.1.1",
     "nyc": "^15.1.0",
-    "serialize-to-module": "^1.0.1"
+    "serialize-to-module": "^1.1.0"
   },
   "engines": {
     "node": ">=8"

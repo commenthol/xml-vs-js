@@ -298,7 +298,7 @@ module.exports = {
       }
     }
   },
-  '#skip FAILS - xml with doctype and element': {
+  'xml with doctype and element': {
     xml: '<?xml version="1.0"?>\n<!DOCTYPE Greeting [\n  <!ELEMENT Greeting (#PCDATA)>\n]>\n<Greeting>Hello World</Greeting>\n',
     obj: {
       _elems: ['_PROCESSING', '_PROCESSING', '_text', 'Greeting'],

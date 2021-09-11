@@ -1,4 +1,4 @@
-module.exports = {
+const m = {
   attribute: {
     xml: '<root length="12345"/>',
     obj: {
@@ -141,7 +141,7 @@ module.exports = {
       xmlMode: false,
       encodeEntities: true
     },
-    xml: '<r>&rfloor; &spadesuit; &copy; &srarr; &amp; &lt; &lt; &lt; &lt; &gt; &realpart; &wp; &euro;</r>',
+    xml: '<r>&rfloor; &spades; &copy; &rarr; &amp; &lt; &lt; &lt; &lt; &gt; &real; &weierp; &euro;</r>',
     obj: {
       _elems: ['r'],
       r: {
@@ -194,7 +194,7 @@ module.exports = {
     opts: {
       encodeEntities: true
     },
-    xml: '<r>&quot; &#xA9; &amp; &lt; &lt; &lt; &lt; &gt; &apos;</r>',
+    xml: '<r>&quot; &#xa9; &amp; &lt; &lt; &lt; &lt; &gt; &apos;</r>',
     obj: {
       _elems: ['r'],
       r: {
@@ -338,8 +338,8 @@ module.exports = {
       }
     }
   },
-  '#skip FAILS - xml with doctype and element': {
-    xml: '<?xml version="1.0"?>\n<!DOCTYPE Greeting [\n  <!ELEMENT Greeting (#PCDATA)>\n\n]>\n<Greeting>Hello World</Greeting>',
+  '#skip FAILS xml with doctype and element': {
+    xml: '<?xml version="1.0"?>\n<!DOCTYPE Greeting [\n  <!ELEMENT Greeting (#PCDATA)>\n\n]>;\n<Greeting>Hello World</Greeting>',
     obj: {
       _elems: ['_PROCESSING', '_PROCESSING', '_text', 'Greeting'],
       _PROCESSING: [{
@@ -374,10 +374,7 @@ module.exports = {
     xml: '<root><text>one</text><text>2</text></root>',
     obj: {
       root: {
-        text: [
-          'one',
-          2
-        ]
+        text: ['one', 2]
       }
     }
   },
@@ -416,7 +413,9 @@ module.exports = {
       root: {
         _COMMENT: ' example wo order of elements ',
         section: {
-          _attrs: { class: 'blue' },
+          _attrs: {
+            class: 'blue'
+          },
           span: ['one', 'four'],
           _text: 'three',
           strong: 'two'
@@ -433,10 +432,7 @@ module.exports = {
       root: {
         section: {
           _elems: ['span', 'strong', '_text', 'span'],
-          span: [
-            'one',
-            'four'
-          ],
+          span: ['one', 'four'],
           _text: 'three',
           strong: 'two'
         }
@@ -468,3 +464,4 @@ module.exports = {
     }
   }
 }
+module.exports = m
