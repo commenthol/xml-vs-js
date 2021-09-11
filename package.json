@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "entities": "^3.0.1",
-    "html-void-elements": "^1.0.5",
     "htmlparser2": "^7.1.1"
   },
   "devDependencies": {

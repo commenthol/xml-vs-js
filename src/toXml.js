@@ -1,5 +1,5 @@
 const { encodeXML, encodeHTML } = require('entities')
-const voidElements = require('html-void-elements')
+const voidElements = require('./htmlVoidElements')
 
 const escapeHTMLMap = {
   '&': '&amp;',
