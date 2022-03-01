@@ -27,12 +27,12 @@
     "test": "test"
   },
   "scripts": {
-    "ci": "npm run clean && npm run lint && npm test",
+    "ci": "npm run clean && npm run lint && npm test && npm run types",
     "clean": "rimraf coverage .nyc_output",
     "clean:all": "rimraf node_modules && npm run clean",
     "coverage": "c8 -r lcov -r text -r html npm test",
     "lint": "eslint --ext .js .",
-    "prepublishOnly": "npm run all",
+    "prepublishOnly": "npm run ci",
     "test": "mocha",
     "types": "rimraf types; tsc --emitDeclarationOnly true --noEmitOnError"
   },
