@@ -41,8 +41,10 @@ const buildElems = (pointer) => {
     .filter(n => n !== ATTRIBS && n !== NAMESPACE)
     .reduce((n, elem) => {
       if (Array.isArray(pointer[elem])) {
+        // @ts-ignore
         pointer[elem].forEach(() => n.push(elem))
       } else {
+        // @ts-ignore
         n.push(elem)
       }
       return n
@@ -97,6 +99,7 @@ const closeTag = (elem, attrs, ns, selfClosing, opts) => {
  * @param {Boolean} [opts.xmlMode=true] - xmlMode is set by default; Set to `false` for html
  * @param {Boolean} [opts.encodeEntities=false] - encode entities
  */
+// @ts-ignore
 function toXml (obj, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
@@ -162,7 +165,7 @@ function toXml (obj, opts, cb) {
     pointers.pop()
     return selfClosing
   }
-  build(obj, {})
+  build(obj, { type: undefined })
 
   cb(null, out.join(''))
 }

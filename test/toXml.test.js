@@ -1,5 +1,6 @@
 const assert = require('assert')
 const { toXml } = require('..')
+const { itt } = require('./support/index.js')
 const log = require('debug')('test:toXml')
 const fixtures = require('./fixtures/forXml.js')
 const serializeToModule = require('serialize-to-module')
@@ -18,12 +19,6 @@ function writeFixtures () {
 function update (ref, data) {
   if (WRITE) ref.xml = data
 }
-
-const itt = (name, fn) => /^#skip/.test(name)
-  ? it.skip(name, fn)
-  : /^#only/.test(name)
-    ? it.only(name, fn)
-    : it(name, fn)
 
 describe('toXml', function () {
   after(() => {

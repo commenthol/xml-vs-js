@@ -3,6 +3,7 @@ const { toJs } = require('..')
 const log = require('debug')('test:toJs')
 const fixtures = require('./fixtures/forJs.js')
 const serializeToModule = require('serialize-to-module')
+const { itt } = require('./support/index.js')
 const fs = require('fs')
 const path = require('path')
 
@@ -18,12 +19,6 @@ function writeFixtures () {
 function update (ref, data) {
   if (WRITE) ref.obj = data
 }
-
-const itt = (name, fn) => /^#skip/.test(name)
-  ? it.skip(name, fn)
-  : /^#only/.test(name)
-    ? it.only(name, fn)
-    : it(name, fn)
 
 describe('toJs', function () {
   after(() => {

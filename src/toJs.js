@@ -27,8 +27,10 @@ const OPTIONS = {
  * @param {Object} [opts.recognizeCDATA=true] - recognize CDATA tags in html
  * @param {Boolean} [opts.elems] - set to `false` if output shall not contain `_elems` fields; order of xml elements is not guarateed any longer.
  * @param {Boolean} [opts.attrs] - set to `false` if output shall not contain any attributes `_attrs` fields;
+ * @param {Boolean} [opts.ns] - set to `false` if output shall not contain any namespace `_ns` fields;
  * @param {Function} cb - `callback(err, obj)`
  */
+// @ts-ignore
 function toJs (xml, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
@@ -39,18 +41,23 @@ function toJs (xml, opts, cb) {
   const pointers = []
   let pointer = out
 
-  const _ELEMS = _opts.elems !== undefined ? opts.elems : ELEMS
-  const _ATTRIBS = _opts.attrs !== undefined ? opts.attrs : ATTRIBS
-  const _NAMESPACE = _opts.ns !== undefined ? opts.ns : NAMESPACE
+  const _ELEMS = _opts.elems !== undefined ? _opts.elems : ELEMS
+  const _ATTRIBS = _opts.attrs !== undefined ? _opts.attrs : ATTRIBS
+  const _NAMESPACE = _opts.ns !== undefined ? _opts.ns : NAMESPACE
 
   const elems = _ELEMS
     ? (pointer, name) => {
+        // @ts-ignore
         if (!pointer[_ELEMS]) {
+          // @ts-ignore
           pointer[_ELEMS] = []
         }
+        // @ts-ignore
         pointer[_ELEMS].push(name)
       }
     : () => {}
+
+  // @ts-ignore
   const lastElem = (pointer) => _ELEMS && pointer[_ELEMS] && pointer[_ELEMS][pointer[_ELEMS].length - 1]
 
   const stripNamespace = (name = '') => {
@@ -62,6 +69,7 @@ function toJs (xml, opts, cb) {
 
   const namespace = _NAMESPACE
     ? (pointer, ns) => {
+        // @ts-ignore
         if (ns) pointer[_NAMESPACE] = ns
       }
     : () => {}
@@ -93,14 +101,16 @@ function toJs (xml, opts, cb) {
     if (last === TEXT || !/^\s*$/.test(text)) {
       if (pointer[TEXT]) {
         if (last === TEXT) {
-          // if (!Array.isArray(pointer[TEXT])) {
-          pointer[TEXT] += text
-          // } else {
-          //   const l = pointer[TEXT].length - 1
-          //   pointer[TEXT][l] += text
-          // }
+          if (Array.isArray(pointer[TEXT])) {
+            elems(pointer, TEXT)
+            pointer[TEXT].push(text)
+          } else {
+            pointer[TEXT] += text
+          }
         } else {
-          if (!Array.isArray(pointer[TEXT])) pointer[TEXT] = [pointer[TEXT]]
+          if (!Array.isArray(pointer[TEXT])) {
+            pointer[TEXT] = [pointer[TEXT]]
+          }
           elems(pointer, TEXT)
           pointer[TEXT].push(text)
         }
@@ -110,7 +120,8 @@ function toJs (xml, opts, cb) {
       }
     }
   }
-  const onclosetag = (/* name */) => {
+  // @ts-ignore
+  const onclosetag = (name) => {
     pointer = pointers.pop()
   }
   const oncomment = (data) => {
@@ -120,6 +131,7 @@ function toJs (xml, opts, cb) {
   const oncommentend = () => {
     onclosetag(COMMENT)
   }
+  // @ts-ignore
   const onprocessinginstruction = (name, data) => {
     onopentag(PROCESSING)
     pointer[TEXT] = data // TODO should split up attribs and elem

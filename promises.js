@@ -1,19 +1,19 @@
-const toJs = require('./toJs')
-const toXml = require('./toXml')
-const toObj = require('./toObj')
-
+const { promisify } = require('util')
 const {
+  toJs,
+  toXml,
+  toObj,
   TEXT,
   ELEMS,
   ATTRIBS,
   PROCESSING,
   CDATA,
   COMMENT
-} = require('./common')
+} = require('./src/index.js')
 
 module.exports = {
-  toJs,
-  toXml,
+  toJs: promisify(toJs),
+  toXml: promisify(toXml),
   toObj,
   TEXT,
   ELEMS,

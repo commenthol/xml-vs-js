@@ -135,6 +135,27 @@ module.exports = {
       }
     }
   },
+  'xml entities elems=false': {
+    opts: {
+      elems: false
+    },
+    xml: `<root>
+      <section>
+        <name>foobar</name>
+      </section>
+      <section>
+        <name>test &amp; debug</name>
+      </section>
+    </root>`,
+    obj: {
+      root: {
+        section: [
+          { name: { _text: 'foobar' } },
+          { name: { _text: ['test ', '&', ' debug'] } }
+        ]
+      }
+    }
+  },
   'html entities': {
     opts: {
       xmlMode: false,

@@ -1,0 +1,10 @@
+import toJs = require("./toJs");
+import toXml = require("./toXml");
+import toObj = require("./toObj");
+import { TEXT } from "./common";
+import { ELEMS } from "./common";
+import { ATTRIBS } from "./common";
+import { PROCESSING } from "./common";
+import { CDATA } from "./common";
+import { COMMENT } from "./common";
+export { toJs, toXml, toObj, TEXT, ELEMS, ATTRIBS, PROCESSING, CDATA, COMMENT };
