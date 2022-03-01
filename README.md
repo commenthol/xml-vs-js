@@ -3,7 +3,7 @@
 > Convert XML/ HTML to Javascript and vice versa
 
 [![NPM version](https://badge.fury.io/js/xml-vs-js.svg)](https://www.npmjs.com/package/xml-vs-js/)
-[![Build Status](https://app.travis-ci.com/commenthol/xml-vs-js.svg?branch=master)](https://app.travis-ci.com/commenthol/xml-vs-js)
+[![Build Status](https://github.com/commenthol/xml-vs-js/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/commenthol/xml-vs-js/actions/workflows/ci.yml?query=branch%3Amaster)
 
 Features:
 - Uses [htmlparser2][] to convert from xml to js.
