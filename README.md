@@ -25,18 +25,20 @@ For syntax of the Js Object please refer to the test fixtures in `./test/fixture
 
 ## Table of Contents
 
-<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<!-- !toc (minlevel=2 omit="Table of Contents") -->
 
-- [Table of Contents](#table-of-contents)
-- [Conversion from XML to Js](#conversion-from-xml-to-js)
-	- [Example toJs](#example-tojs)
-- [Conversion from Js to XML](#conversion-from-js-to-xml)
-	- [Example toXml](#example-toxml)
-	- [Example toXml with order of elems](#example-toxml-with-order-of-elems)
-- [License](#license)
-- [References](#references)
+* [Conversion from XML to Js](#conversion-from-xml-to-js)
+  * [Example toJs](#example-tojs)
+  * [Promises API](#promises-api)
+* [Conversion from Js to XML](#conversion-from-js-to-xml)
+  * [Example toXml](#example-toxml)
+  * [Promises API](#promises-api-1)
+  * [Example toXml with order of elems](#example-toxml-with-order-of-elems)
+* [Simplify object](#simplify-object)
+* [License](#license)
+* [References](#references)
 
-<!-- /TOC -->
+<!-- toc! -->
 
 ## Conversion from XML to Js
 
@@ -123,6 +125,14 @@ toJs(xml, (err, obj) => {
 })
 ```
 
+### Promises API
+
+```js
+const {toJs} = require('xml-vs-js/promises')
+
+const obj = await toJs(xml, opts)
+```
+
 ## Conversion from Js to XML
 
 ```js
@@ -163,6 +173,14 @@ toXml(obj, (err, xml) => {
 })
 ```
 
+### Promises API
+
+```js
+const {toXml} = require('xml-vs-js/promises')
+
+const xml = await toXml(obj, opts)
+```
+
 ### Example toXml with order of elems
 
 ```js
@@ -190,6 +208,67 @@ toXml(obj, (err, xml) => {
   //  </section>
   // </root>
 })
+```
+
+## Simplify object
+
+```js
+toObj(obj, opts)
+```
+
+- `{Object} obj` - the object to simplify
+- `{Object} [opts]` - options
+- `{Boolean} [opts.elems]` - if `false` remove all _elems props
+- `{Boolean} [opts.attrs]` - if `false` remove all _attrs props
+- `{Boolean} [opts.ns]` - if `false` remove all _ns props
+
+
+To further simplify the object structure from `toJS` use the `toObj` method:
+
+```js
+const {toJs, toObj} = require('../promises.js')
+
+const xml = `
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Example Feed</title>
+  <entry>
+    <title>Entry</title>
+    <link href="http://example.org/2003/12/13/atom03" />
+    <link rel="alternate" type="text/html" href="http://example.org/2003/12/13/atom03.html"/>
+  </entry>
+  <entry>
+    <title>Update</title>
+  </entry>
+</feed>
+`
+
+const obj = await toJs(xml)
+const simple = toObj(obj, {elems: false, attrs: true})
+console.log(simple)
+/*
+{
+  feed: {
+    _attrs: { xmlns: 'http://www.w3.org/2005/Atom' },
+    title: 'Example Feed',
+    entry: [
+      {
+        title: 'Entry',
+        link: [
+          { _attrs: { href: 'http://example.org/2003/12/13/atom03' } },
+          {
+            _attrs: {
+              rel: 'alternate',
+              type: 'text/html',
+              href: 'http://example.org/2003/12/13/atom03.html'
+            }
+          }
+        ]
+      },
+      { title: 'Update' }
+    ]
+  }
+}
+*/
 ```
 
 ## License
