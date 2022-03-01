@@ -1,6 +1,6 @@
 {
   "name": "xml-vs-js",
-  "version": "2.0.4",
+  "version": "2.1.0-0",
   "description": "A xml to js to xml transformer",
   "keywords": [
     "converter",
@@ -29,25 +29,26 @@
     "all": "npm run clean && npm run lint && npm test",
     "clean": "rimraf coverage .nyc_output",
     "clean:all": "rimraf node_modules && npm run clean",
-    "coverage": "nyc -r text -r html npm test",
-    "lint": "eslint '**/*.js'",
+    "coverage": "c8 -r lcov -r text -r html npm test",
+    "lint": "eslint --ext .js .",
     "prepublishOnly": "npm run all",
     "test": "mocha"
   },
   "dependencies": {
     "entities": "^3.0.1",
-    "htmlparser2": "^7.1.1"
+    "htmlparser2": "^7.2.0"
   },
   "devDependencies": {
-    "debug": "^4.3.2",
+    "rimraf": "*",
+    "debug": "^4.3.3",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-standard": "^5.0.0",
-    "mocha": "^9.1.1",
-    "nyc": "^15.1.0",
+    "mocha": "^9.2.1",
+    "c8": "^7.11.0",
     "serialize-to-module": "^1.1.0"
   },
   "engines": {
