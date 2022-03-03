@@ -98,6 +98,7 @@ const closeTag = (elem, attrs, ns, selfClosing, opts) => {
  * @param {Object} [opts] - options
  * @param {Boolean} [opts.xmlMode=true] - xmlMode is set by default; Set to `false` for html
  * @param {Boolean} [opts.encodeEntities=false] - encode entities
+ * @param {Function} cb - `callback(err, obj)`
  */
 // @ts-ignore
 function toXml (obj, opts, cb) {
