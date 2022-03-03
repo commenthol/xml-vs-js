@@ -34,8 +34,11 @@ const queryByName = (query) => envelope({
   keys: 'QueryByNameResponse.QueryByNameResult.diffgram.QueryByName_DataSet.QueryByName'
 })
 
+const ALPHABET = Array(26).fill(0).map((_, i) => String.fromCharCode(65 + i))
+const randomChar = () => ALPHABET[Math.random() * ALPHABET.length | 0]
+
 const main = async () => {
-  log(await soapRequest(queryByName, 'Y'))
+  log(await soapRequest(queryByName, randomChar()))
   log(await soapRequest(mission))
 }
 
